@@ -1,4 +1,4 @@
-<config configName="sam_d21_xpro" projectName="sam_d21_xpro" configVersion="1.1" device="ATSAMD21J18A" deviceLibraryClass="com.microchip.mcc.harmony.Harmony3Library" coreVersion="5.4.3">
+<config configName="sam_d21_xpro" projectName="sam_d21_xpro" configVersion="1.1" device="ATSAMD21J18A" deviceLibraryClass="com.microchip.mcc.harmony.Harmony3Library" coreVersion="5.4.11">
    <usedPackages class="java.util.ArrayList"/>
    <usedClasses class="java.util.TreeMap">
       <entry>
@@ -1141,12 +1141,12 @@
          <hash>9c2629f39f42c846c806b0ffe8c8024c8520bc13fbb2cec9cfe917d252fb5a1d</hash>
       </entry>
       <entry>
-         <file>..\src\packs\ATSAMD21J18A_DFP\instance\tcc2.h</file>
-         <hash>895d1601145eb3776da6d31113c22c8fb13070abc9f1584923db63995be63780</hash>
-      </entry>
-      <entry>
          <file>..\src\config\sam_d21_xpro\peripheral\nvic\plib_nvic.h</file>
          <hash>81e813a093101d546799e00723cbf7245e2d18471fa51c8d130c5809cecca03e</hash>
+      </entry>
+      <entry>
+         <file>..\src\packs\ATSAMD21J18A_DFP\instance\tcc2.h</file>
+         <hash>895d1601145eb3776da6d31113c22c8fb13070abc9f1584923db63995be63780</hash>
       </entry>
       <entry>
          <file>..\src\config\sam_d21_xpro\exceptions.c</file>
@@ -1234,7 +1234,7 @@
       </entry>
       <entry>
          <file>..\src\config\sam_d21_xpro\initialization.c</file>
-         <hash>4a22a5a44832033c269ca4ab66fb3b88ae6a179f5e4d03a299259fdf2cd1f450</hash>
+         <hash>39f28c98fd97df1d3b2fbf2d777ec3c0362f975413ea26b0a206dece7b5434fe</hash>
       </entry>
       <entry>
          <file>..\src\packs\ATSAMD21J18A_DFP\component\sercom.h</file>
@@ -1258,7 +1258,7 @@
       </entry>
       <entry>
          <file>..\src\config\sam_d21_xpro\definitions.h</file>
-         <hash>95ce88cabad606676d4b078cfaea028ba9d5241f14c27731071b849ef13e600d</hash>
+         <hash>a8167c28f6fd329d5edcf360ee5732494b1abbb4a92a4632860cbb10bd1ede23</hash>
       </entry>
       <entry>
          <file>..\src\packs\CMSIS\CMSIS\Core\Include\cmsis_armcc.h</file>
@@ -1362,11 +1362,11 @@
       </entry>
       <entry>
          <file>..\src\config\sam_d21_xpro\peripheral\systick\plib_systick.c</file>
-         <hash>f64a15f6e5d1d288debe9bfc0146a05a955925dc1f3160e3de6b8cee04eaeaec</hash>
+         <hash>c1b047e8f20a70a3a72c08c585bdf0e360c4818d5733ed68162399241e24a20e</hash>
       </entry>
       <entry>
          <file>..\src\config\sam_d21_xpro\peripheral\systick\plib_systick.h</file>
-         <hash>43e550acb1089f7ee29aedf3097aa66ce3e5a25c03b9794c8f230fb1dbd516dd</hash>
+         <hash>a189d32422a5de630f963f5ec70b0ee72a7718647f35bd391e13badd54e4f701</hash>
       </entry>
       <entry>
          <file>..\src\packs\ATSAMD21J18A_DFP\instance\tcc0.h</file>
@@ -1438,7 +1438,7 @@
       </entry>
       <entry>
          <file>..\src\config\sam_d21_xpro\peripheral\port\plib_port.c</file>
-         <hash>136ea3ed941266b0f69a43edb69453b9515be671634015d3f745dea230c462b7</hash>
+         <hash>ccd38f7bac6c5941a64929a2eb14673e5069b96d08dd73e55c110535ba69e8e3</hash>
       </entry>
       <entry>
          <file>..\src\config\sam_d21_xpro\device.h</file>
@@ -1458,7 +1458,7 @@
       </entry>
       <entry>
          <file>..\src\config\sam_d21_xpro\interrupts.c</file>
-         <hash>1bb3aaa6846dbc43e09cdf87c8fed73c301b0658f44c404e528fa2bbad9c55d3</hash>
+         <hash>3d8b7cc5194298c1bf42beb1870811650970c31341b6cfdb0d7bf8895f36da65</hash>
       </entry>
       <entry>
          <file>..\src\config\sam_d21_xpro\peripheral\sercom\usart\plib_sercom3_usart.h</file>
@@ -1470,7 +1470,7 @@
       </entry>
       <entry>
          <file>..\src\config\sam_d21_xpro\interrupts.h</file>
-         <hash>82c38c865926d077afa6cf0ba929acdaad72aed83c3b52dacd93e912a2d671d8</hash>
+         <hash>4077b6d65b6f1734f0c235a2a1a7ca812a2d0c015309e2d0b28cb9d154650c62</hash>
       </entry>
       <entry>
          <file>..\src\config\sam_d21_xpro\libc_syscalls.c</file>
@@ -1517,12 +1517,12 @@
          <hash>a10c9385ab1460929c8d9efdbd3ee8e491051546a6e08c5dbf7767300235ebcd</hash>
       </entry>
       <entry>
-         <file>..\src\packs\ATSAMD21J18A_DFP\instance\sercom1.h</file>
-         <hash>07c22eb3538dfec285b25d7e600173865121bd3767833217932e64d5e45b6ba4</hash>
-      </entry>
-      <entry>
          <file>..\src\config\sam_d21_xpro\toolchain_specifics.h</file>
          <hash>c93f9d68b1623668727be21b4449250a7e4a5d7040776d6f6d604a7528ffc9eb</hash>
+      </entry>
+      <entry>
+         <file>..\src\packs\ATSAMD21J18A_DFP\instance\sercom1.h</file>
+         <hash>07c22eb3538dfec285b25d7e600173865121bd3767833217932e64d5e45b6ba4</hash>
       </entry>
       <entry>
          <file>..\src\packs\ATSAMD21J18A_DFP\component\evsys.h</file>
