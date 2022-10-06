@@ -72,7 +72,7 @@ extern "C" {
 /* Select the device being upgraded by the SPI bootloader host.
  * Refer to spi_target_board.h for target board names
 */
-#define APP_SPI_BOOTLOADER_TARGET_DEVICE        SAM_E54_XPRO
+#define APP_SPI_BOOTLOADER_TARGET_DEVICE        PIC32MM_USB_CURIOSITY
 
 /* Include the Header file defining the target configuration for the board selected above */
 #include "spi_target_config.h"
