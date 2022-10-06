@@ -1,4 +1,4 @@
-<config configName="sam_d21_xpro" projectName="spi_bootloader_sam_d21_xpro" configVersion="1.1" device="ATSAMD21J18A" deviceLibraryClass="com.microchip.mcc.harmony.Harmony3Library" coreVersion="5.4.3">
+<config configName="sam_d21_xpro" projectName="spi_bootloader_sam_d21_xpro" configVersion="1.1" device="ATSAMD21J18A" deviceLibraryClass="com.microchip.mcc.harmony.Harmony3Library" coreVersion="5.4.11">
    <usedPackages class="java.util.ArrayList"/>
    <usedClasses class="java.util.TreeMap">
       <entry>
@@ -1367,7 +1367,7 @@
       </entry>
       <entry>
          <file>..\src\config\sam_d21_xpro\peripheral\sercom\spi_slave\plib_sercom1_spi_slave.c</file>
-         <hash>36610eef53e44833eb61f0fa39de4e3974f841392439569e909c18e2abeabdc1</hash>
+         <hash>8ebfeaf5b68b84259d1eef77d116862c106da5c863e391c4b43294f6f2f923e4</hash>
       </entry>
       <entry>
          <file>..\src\packs\ATSAMD21J18A_DFP\instance\dmac.h</file>
@@ -1427,7 +1427,7 @@
       </entry>
       <entry>
          <file>..\src\config\sam_d21_xpro\initialization.c</file>
-         <hash>e8b65a1a1ab6cda5b58eca0bde8249e5f4600f1b2c368abd5846f55892af6702</hash>
+         <hash>61f07bd7b6074363a6ad071f82c7b48e0599dd7c9428ae729018995474a558c7</hash>
       </entry>
       <entry>
          <file>..\src\config\sam_d21_xpro\bootloader\bootloader_common.h</file>
@@ -1515,7 +1515,7 @@
       </entry>
       <entry>
          <file>..\src\config\sam_d21_xpro\btl.ld</file>
-         <hash>f9f106577d45c51507c1327796038eb74f84821d9b939f34c1061d2531de1cc9</hash>
+         <hash>5dbe00558f1d4b72fa1b61674a82bb91bbc787ddc85328ec144f47f639460f92</hash>
       </entry>
       <entry>
          <file>..\src\packs\ATSAMD21J18A_DFP\instance\tc4.h</file>
@@ -1631,7 +1631,7 @@
       </entry>
       <entry>
          <file>..\src\config\sam_d21_xpro\peripheral\port\plib_port.c</file>
-         <hash>250d751adaeae5b94de5807428021db4f7409422841d16d6e657a6dc67c04434</hash>
+         <hash>48736ea20f1d2e7ef32a2a0bd65e82662f4998996c75977a94114296b4aeaa50</hash>
       </entry>
       <entry>
          <file>..\src\config\sam_d21_xpro\device.h</file>

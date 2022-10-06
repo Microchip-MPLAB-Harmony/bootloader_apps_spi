@@ -122,6 +122,7 @@ size_t SERCOM1_SPI_Read(void* pRdBuffer, size_t size)
 {
     uint8_t intState = SERCOM1_REGS->SPIS.SERCOM_INTENSET;
     size_t rdSize = size;
+    uint8_t* pDstBuffer = (uint8_t*)pRdBuffer;
 
     SERCOM1_REGS->SPIS.SERCOM_INTENCLR = intState;
 
@@ -130,7 +131,7 @@ size_t SERCOM1_SPI_Read(void* pRdBuffer, size_t size)
         rdSize = sercom1SPISObj.rdInIndex;
     }
 
-    (void) memcpy(pRdBuffer, SERCOM1_SPI_ReadBuffer, rdSize);
+    (void) memcpy(pDstBuffer, SERCOM1_SPI_ReadBuffer, rdSize);
 
     SERCOM1_REGS->SPIS.SERCOM_INTENSET = intState;
 
@@ -143,6 +144,7 @@ size_t SERCOM1_SPI_Write(void* pWrBuffer, size_t size )
     uint8_t intState = SERCOM1_REGS->SPIS.SERCOM_INTENSET;
     size_t wrSize = size;
     bool writeReady = false;
+    uint8_t* pSrcBuffer = (uint8_t*)pWrBuffer;
 
     SERCOM1_REGS->SPIS.SERCOM_INTENCLR = intState;
 
@@ -151,7 +153,7 @@ size_t SERCOM1_SPI_Write(void* pWrBuffer, size_t size )
         wrSize = SERCOM1_SPI_WRITE_BUFFER_SIZE;
     }
 
-   (void) memcpy(SERCOM1_SPI_WriteBuffer, pWrBuffer, wrSize);
+   (void) memcpy(SERCOM1_SPI_WriteBuffer, pSrcBuffer, wrSize);
 
     sercom1SPISObj.nWrBytes = wrSize;
     sercom1SPISObj.wrOutIndex = 0U;
@@ -255,7 +257,7 @@ void SERCOM1_SPI_InterruptHandler(void)
     if((SERCOM1_REGS->SPIS.SERCOM_INTFLAG & SERCOM_SPIS_INTFLAG_RXC_Msk) == SERCOM_SPIS_INTFLAG_RXC_Msk)
     {
         /* Reading DATA register will also clear the RXC flag */
-        txRxData = (uint8_t)SERCOM1_REGS->SPIS.SERCOM_DATA;     
+        txRxData = (uint8_t)SERCOM1_REGS->SPIS.SERCOM_DATA;
 
         if (sercom1SPISObj.rdInIndex < SERCOM1_SPI_READ_BUFFER_SIZE)
         {

@@ -365,6 +365,8 @@ static void BL_SPI_EventHandler(uintptr_t context )
     if (SERCOM1_SPI_ErrorGet() == SPI_SLAVE_ERROR_NONE)
     {
         spiBLData.nReadBytes = SERCOM1_SPI_Read((void*)spiBLData.cmd.readBuffer, SERCOM1_SPI_ReadCountGet());
+        if(spiBLData.nReadBytes == 0)
+            SERCOM1_SPI_Ready();
     }
     else
     {

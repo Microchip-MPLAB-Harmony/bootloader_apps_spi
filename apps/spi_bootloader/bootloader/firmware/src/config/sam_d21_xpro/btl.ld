@@ -54,7 +54,7 @@ SEARCH_DIR(.)
  */
 ENTRY(__XC32_RESET_HANDLER_NAME)
 
-#define ROM_START 0x00000000
+#define ROM_START 0x0
 
 /* Bootloader size is calculated with below criteria with optimization level -O2
  * bootloader size = Minimum Flash Erase Size Or actual bootloader ELF size
