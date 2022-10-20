@@ -153,7 +153,7 @@ extern "C" {
 #elif APP_SPI_BOOTLOADER_TARGET_DEVICE == SAM_E54_XPRO
 #define APP_BINARY_FILE             "sam_e54_xpro.X.production.bin"
 #define APP_ERASE_PAGE_SIZE         (8192L)
-#define APP_PROGRAM_PAGE_SIZE       (8192L)
+#define APP_PROGRAM_PAGE_SIZE       (512L)
 #define APP_IMAGE_START_ADDR        0x2000UL
 #define APP_PROGRAM_DEV_CONFIG      false
 #define APP_DEVCFG_FILE             "devcfg.txt"

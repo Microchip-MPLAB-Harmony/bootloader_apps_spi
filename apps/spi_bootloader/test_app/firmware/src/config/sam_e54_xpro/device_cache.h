@@ -1,24 +1,26 @@
 /*******************************************************************************
-  User Configuration Header
+  Cortex-M L1 Cache Header
 
   File Name:
-    user.h
+    device_cache.h
 
   Summary:
-    Build-time configuration header for the user defined by this project.
+    Preprocessor definitions to provide L1 Cache control.
 
   Description:
-    An MPLAB Project may have multiple configurations.  This file defines the
-    build-time options for a single configuration.
+    An MPLAB PLIB or Project can include this header to perform cache cleans,
+    invalidates etc. For the DCache and ICache.
 
   Remarks:
-    It only provides macro definitions for build-time configuration options
+    This header should not define any prototypes or data definitions, or
+    include any files that do.  The file only provides macro definitions for
+    build-time.
 
 *******************************************************************************/
 
 // DOM-IGNORE-BEGIN
 /*******************************************************************************
-* Copyright (C) 2020 Microchip Technology Inc. and its subsidiaries.
+* Copyright (C) 2019 Microchip Technology Inc. and its subsidiaries.
 *
 * Subject to your compliance with these terms, you may use Microchip software
 * and any derivatives exclusively with Microchip products. It is your
@@ -41,11 +43,19 @@
 *******************************************************************************/
 // DOM-IGNORE-END
 
-#ifndef USER_H
-#define USER_H
+#ifndef DEVICE_CACHE_H
+#define DEVICE_CACHE_H
 
-#include "bsp/bsp.h"
-#include "toolchain_specifics.h"
+// *****************************************************************************
+// *****************************************************************************
+// Section: Included Files
+// *****************************************************************************
+// *****************************************************************************
+/*  This section Includes other configuration headers necessary to completely
+    define this configuration.
+*/
+
+#include "device.h"
 
 // DOM-IGNORE-BEGIN
 #ifdef __cplusplus  // Provide C++ Compatibility
@@ -57,27 +67,23 @@ extern "C" {
 
 // *****************************************************************************
 // *****************************************************************************
-// Section: User Configuration macros
+// Section: L1 Cache Configuration
 // *****************************************************************************
 // *****************************************************************************
-#define LED_ON()                            LED_On()
-#define LED_OFF()                           LED_Off()
-#define LED_TOGGLE()                        LED_Toggle()
-#define SWITCH_GET()                        SWITCH_Get()
-#define SWITCH_STATUS_PRESSED               SWITCH_STATE_PRESSED
 
-/* Include the Header file defining the supported target boards. */
-#include "spi_target_board.h"
 
-/* Select the device being upgraded by the SPI bootloader host.
- * Refer to spi_target_board.h for target board names
-*/
-#define APP_SPI_BOOTLOADER_TARGET_DEVICE        SAM_E54_XPRO
+#define ICACHE_ENABLE()
+#define ICACHE_DISABLE()
+#define ICACHE_INVALIDATE()
 
-/* Include the Header file defining the target configuration for the board selected above */
-#include "spi_target_config.h"
-
-#define SPI_FUNC(OP)           (SERCOM6_SPI_ ## OP)
+#define DCACHE_ENABLE()
+#define DCACHE_DISABLE()
+#define DCACHE_INVALIDATE()
+#define DCACHE_CLEAN()
+#define DCACHE_CLEAN_INVALIDATE()
+#define DCACHE_CLEAN_BY_ADDR(addr,sz)
+#define DCACHE_INVALIDATE_BY_ADDR(addr,sz)
+#define DCACHE_CLEAN_INVALIDATE_BY_ADDR(addr,sz)
 
 //DOM-IGNORE-BEGIN
 #ifdef __cplusplus
@@ -85,7 +91,4 @@ extern "C" {
 #endif
 //DOM-IGNORE-END
 
-#endif // USER_H
-/*******************************************************************************
- End of File
-*/
+#endif // #ifndef DEVICE_CACHE_H
