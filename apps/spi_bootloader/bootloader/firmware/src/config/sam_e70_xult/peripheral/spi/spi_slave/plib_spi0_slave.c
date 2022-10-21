@@ -121,9 +121,10 @@ size_t SPI0_Write(void* pWrBuffer, size_t size )
     spi0Obj.nWrBytes = wrSize;
     spi0Obj.wrOutIndex = 0;
 
-    //while ((SPI0_REGS->SPI_SR & SPI_SR_TDRE_Msk) && (spi0Obj.wrOutIndex < spi0Obj.nWrBytes))
+    while ((SPI0_REGS->SPI_SR & SPI_SR_TDRE_Msk) && (spi0Obj.wrOutIndex < spi0Obj.nWrBytes))
     {
         *((uint8_t*)&SPI0_REGS->SPI_TDR) = SPI0_WriteBuffer[spi0Obj.wrOutIndex++];
+        asm("nop");
     }
 
     /* Restore interrupt enable state and also enable TDRE interrupt */
@@ -182,7 +183,7 @@ void SPI0_InterruptHandler(void)
 {
     uint8_t txRxData = 0;
 
-    uint32_t statusFlags = SPI0_REGS->SPI_SR;
+    volatile uint32_t statusFlags = SPI0_REGS->SPI_SR;
 
     if (statusFlags & SPI_SR_OVRES_Msk)
     {
