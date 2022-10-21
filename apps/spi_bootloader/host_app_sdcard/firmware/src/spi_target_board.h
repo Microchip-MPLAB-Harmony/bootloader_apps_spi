@@ -74,6 +74,7 @@ extern "C" {
 #define SAM_L22_XPRO                    10
 #define PIC32CM_MC00_CURIOSITY_PRO      11
 #define PIC32MM_USB_CURIOSITY           12
+#define SAM_E70_XULT                    13    
 
 //DOM-IGNORE-BEGIN
 #ifdef __cplusplus

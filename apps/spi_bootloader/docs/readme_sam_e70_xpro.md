@@ -38,11 +38,11 @@ To build the application, refer to the following table and open the project usin
 
     ![spi_bootloader_host_target_connection](../../spi_bootloader/docs/images/spi_bootloader_host_target_connection.png)
 
-- Connect the MOSI Pin 16 (PC04) on EXT2 of the **Host development kit** to the Pin 16 (PC04) on EXT2 header of the **Target development kit**
-- Connect the MISO Pin 17 (PC07) on EXT2 of the **Host development kit** to the Pin 17 (PC07) on EXT2 header of the **Target development kit**
-- Connect the CS Pin 15 (PC06) on EXT2 of the **Host development kit** to the Pin 15 (PC06) on EXT2 header of the **Target development kit**
-- Connect the SCK Pin 18 (PC05) on EXT2 of the **Host development kit** to the Pin 18 (PC05) on EXT2 header of the **Target development kit**
-- Connect the BUSY Pin 09 (PD00) on EXT2 of the **Host development kit** to the Pin 09 (PD00) on EXT2 header of the **Target development kit**
+- Connect the MOSI Pin 16 (PC04) on EXT2 of the **Host development kit** to the Pin 16 (PD21) on EXT1 header of the **Target development kit**
+- Connect the MISO Pin 17 (PC07) on EXT2 of the **Host development kit** to the Pin 17 (PD20) on EXT1 header of the **Target development kit**
+- Connect the CS Pin 15 (PC06) on EXT2 of the **Host development kit** to the Pin 06 (PB02) on EXT1 header of the **Target development kit**
+- Connect the SCK Pin 18 (PC05) on EXT2 of the **Host development kit** to the Pin 18 (PD22) on EXT1 header of the **Target development kit**
+- Connect the BUSY Pin 09 (PD00) on EXT2 of the **Host development kit** to the Pin 09 (PD28) on EXT1 header of the **Target development kit**
 - Connect the Debug USB port on the Host development kit to the computer using a micro USB cable
 - Connect the Debug USB port on the Target development kit to the computer using a micro USB cable
 
@@ -59,7 +59,7 @@ if SDCARD Host Development Kit being used is [SAM E54 Xplained Pro Evaluation Ki
     - If a SDCARD host application project of different development kit is used then open that project in the IDE
 2. Build and program the SDCARD host application using the IDE on to the SPI host dvelopment kit
 
-3. Open the test application project *test_app/firmware/sam_e70_xpro.X* in the IDE
+3. Open the test application project *test_app/firmware/sam_e70_xult.X* in the IDE
 4. Build the project to generate the binary **(Do not program the binary)**
 
 5. Copy the application binary into the SD card and insert the SD card in the SD card slot available on the  [SAM E54 Xplained Pro Evaluation Kit](https://www.microchip.com/developmenttools/ProductDetails/atsame54-xpro)
@@ -76,7 +76,7 @@ if SDCARD Host Development Kit being used is [SAM E54 Xplained Pro Evaluation Ki
 
 ## Running the Application
 
-1. Open the bootloader project *bootloader/firmware/sam_e70_xpro.X* in the IDE
+1. Open the bootloader project *bootloader/firmware/sam_e70_xult.X* in the IDE
 2. Build and program the application using the IDE on to the **Target development kit**
 3. **If the test application is being programmed**, Open the Terminal application (Ex.:Tera Term) on the computer and configure the serial port settings for **Target Development kit** as follows:
     - Baud : 115200
@@ -87,7 +87,7 @@ if SDCARD Host Development Kit being used is [SAM E54 Xplained Pro Evaluation Ki
 
 4. Press the Switch **SW0** on the Host development kit to trigger programming of the application binary
 5. Once the programming is complete,
-    - **LED0** on the Host development kit will be turned on indicating success
+    - **LED3** on the Host development kit will be turned on indicating success
 
     - If **SDCARD Host application** was used to program the application binary following message will be displayed on the terminal of **Host development kit**
 
@@ -95,7 +95,7 @@ if SDCARD Host Development Kit being used is [SAM E54 Xplained Pro Evaluation Ki
 
     - The target development kit will be reset. Upon re-start, the boot-loader will jump to the user application
 
-    - If the test application is programmed then **LED0** should start blinking and you should see below output on the **Target development kit** console
+    - If the test application is programmed then **LED3** should start blinking and you should see below output on the **Target development kit** console
 
         ![output](../../spi_bootloader/docs/images/btl_spi_test_app_console_success.png)
 
