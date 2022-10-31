@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<Package name="replaceme">
+<Package name="bootloader_apps_spi">
     <Dependencies>
+        <Dependency name="bootloader" version="v3.6.0"/>
     </Dependencies>
 </Package>
