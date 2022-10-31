@@ -4,7 +4,7 @@
 	"content": {
 		"metaDataVersion": "1.1.0",
 		"name": "com.microchip.mcu32.mplabx.project.bootloader_apps_spi_spi_bootloader_sam_e70_xult",
-		"version": "3.2.0",
+		"version": "3.0.0",
 		"displayName": "SPI Bootloader Example for SAM E70/S70/V70/V71 Family",
 		"projectName": "spi_bootloader_sam_e70_xult",
 		"shortDescription": "This example application shows how to use the Bootloader Library to bootload an application using SPI protocol.",
@@ -19,12 +19,12 @@
 			}
 		],
 		"dfp": {
-			"name": "CMSIS",
-			"semverRange": "^5.4.0"
+			"name": "SAME70_DFP",
+			"semverRange": "^4.9.129"
 		},
 		"configurator": {
-			"name": "MHC",
-			"semverRange": ">=3.8.5"
+			"name": "MCC",
+			"semverRange": ">=5.1.9"
 		},
 		"device": {
 			"metaDataVersion": "1.0.0",
@@ -56,7 +56,7 @@
 			"Bootloader"
 		],
 		"keywords": [
-			"MHC",
+			"MCC",
 			"Harmony",
 			"Bootloader",
 			"SPI",

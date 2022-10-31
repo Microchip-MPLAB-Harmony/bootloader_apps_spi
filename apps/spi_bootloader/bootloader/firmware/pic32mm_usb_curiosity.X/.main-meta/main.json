@@ -4,7 +4,7 @@
 	"content": {
 		"metaDataVersion": "1.1.0",
 		"name": "com.microchip.mcu32.mplabx.project.bootloader_apps_spi_spi_bootloader_pic32mm_usb_curiosity",
-		"version": "3.2.0",
+		"version": "3.0.0",
 		"displayName": "SPI Bootloader Example for PIC32MM Family",
 		"projectName": "spi_bootloader_pic32mm_usb_curiosity",
 		"shortDescription": "This example application shows how to use the Bootloader Library to bootload an application using SPI protocol.",
@@ -19,11 +19,11 @@
 			}
 		],
 		"dfp": {
-			"name": "PIC32MM_USB",
+			"name": "PIC32MM_GPM_DFP",
 			"semverRange": "^1.3.50"
 		},
 		"configurator": {
-			"name": "MHC",
+			"name": "MCC",
 			"semverRange": ">=3.8.5"
 		},
 		"device": {
@@ -40,7 +40,7 @@
 		"subcategories": [
 			[
 				"Development Kit",
-				"PIC32MM_USB Starter Kit"
+				"PIC32MM USB Starter Kit"
 			],
 			[
 				"Harmony",
@@ -56,7 +56,7 @@
 			"Bootloader"
 		],
 		"keywords": [
-			"MHC",
+			"MCC",
 			"Harmony",
 			"Bootloader",
 			"SPI",
