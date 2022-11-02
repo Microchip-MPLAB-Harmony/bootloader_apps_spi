@@ -34,5 +34,5 @@ nav_order: 99
 
 - [MPLAB® X IDE v6.00](https://www.microchip.com/mplab/mplab-x-ide)
 - MPLAB® X IDE plug-ins:
-  - MPLAB® Code Configurator (MCC) v5.1.9
+  - MPLAB® Code Configurator (MCC) v5.1.17
 - [MPLAB® XC32 C/C++ Compiler v4.10](https://www.microchip.com/mplab/compilers)
