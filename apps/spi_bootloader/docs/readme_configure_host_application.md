@@ -9,6 +9,4 @@ nav_order: 2
 
 # Configuring a Host Application used to send an application binary to bootloader
 
-- To configure NVM based host application refer to [NVM Host Application Configuration](./readme_configure_host_app_nvm.md)
-
 - To configure SDCARD based host application refer to [SDCARD Host Application Configuration](./readme_configure_host_app_sdcard.md)

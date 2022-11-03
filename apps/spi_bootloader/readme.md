@@ -1,6 +1,6 @@
 ---
-parent: I2C Bootloader Applications
-title: I2C Bootloader
+parent: SPI Bootloader Applications
+title: SPI Bootloader
 has_children: false
 has_toc: false
 nav_order: 1
@@ -8,7 +8,7 @@ nav_order: 1
 
 [![MCHP](https://www.microchip.com/ResourcePackages/Microchip/assets/dist/images/logo.png)](https://www.microchip.com)
 
-To clone or download this application from Github,go to the [main page of this repository](https://github.com/Microchip-MPLAB-Harmony/bootloader_apps_i2c) and then click Clone button to clone this repo or download as zip file. This content can also be download using content manager by following [these instructions](https://github.com/Microchip-MPLAB-Harmony/contentmanager/wiki)
+To clone or download this application from Github,go to the [main page of this repository](https://github.com/Microchip-MPLAB-Harmony/bootloader_apps_spi) and then click Clone button to clone this repo or download as zip file. This content can also be download using content manager by following [these instructions](https://github.com/Microchip-MPLAB-Harmony/contentmanager/wiki)
 
 # SPI Bootloader
 

@@ -44,6 +44,7 @@ To build the application, refer to the following table and open the project usin
 - Connect the CS Pin 15 (PC06) on EXT2 of the **Host development kit** to the Pin 03 (PC11) on J12 header of the **Target development kit**
 - Connect the SCK Pin 18 (PC05) on EXT2 of the **Host development kit** to the Pin 04 (PA10) on J12 header of the **Target development kit**
 - Connect the BUSY Pin 09 (PD00) on EXT2 of the **Host development kit** to the Pin 02 (PC14) on J12 header of the **Target development kit**
+- Connect a ground wire between Host development kit and Target development kit
 - Connect the Debug USB port on the Host development kit to the computer using a micro USB cable
 - Connect the Debug USB port on the Target development kit to the computer using a micro USB cable
 
@@ -94,11 +95,11 @@ If the SDCARD Host Development Kit being used is [SAM E54 Xplained Pro Evaluatio
 
     - If the test application is programmed then **LED1** should start blinking and you should see below output on the **Target development kit** console
 
-        ![output](../../spi_bootloader/docs/images/images/btl_spi_test_app_console_success.png)
+        ![output](../../spi_bootloader/docs/images/btl_spi_test_app_console_success.png)
 
 6. Press and hold the Switch **S1** to trigger Bootloader from test application and you should see below output
 
-    ![output](../../spi_bootloader/docs/images/images/btl_spi_test_app_console_trigger_bootloader.png)
+    ![output](../../spi_bootloader/docs/images/btl_spi_test_app_console_trigger_bootloader.png)
 
 7. Press Reset button on the Host development kit to reprogram the application binary
 8. Repeat Steps 4-5 once

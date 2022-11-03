@@ -42,6 +42,7 @@ To build the application, refer to the following table and open the project usin
 - Connect the CS Pin 15 (PC06) on EXT2 of the **Host development kit** to the Pin 15 (PC06) on EXT2 header of the **Target development kit**
 - Connect the SCK Pin 18 (PC05) on EXT2 of the **Host development kit** to the Pin 18 (PC05) on EXT2 header of the **Target development kit**
 - Connect the BUSY Pin 09 (PD00) on EXT2 of the **Host development kit** to the Pin 09 (PD00) on EXT2 header of the **Target development kit**
+- Connect a ground wire between Host development kit and Target development kit
 - Connect the Debug USB port on the Host development kit to the computer using a micro USB cable
 - Connect the Debug USB port on the Target development kit to the computer using a micro USB cable
 
