@@ -1,23 +1,23 @@
 /*******************************************************************************
-  Cache System Service Library Implementation Source File
+ System Tasks Header File
 
-  Company
-    Microchip Technology Inc.
+  File Name:
+    sys_tasks.h
 
-  File Name
-    sys_cache.c
+  Summary:
+    This file contains declarations for task handles.
 
-  Summary
-    Cache System Service Library interface implementation.
+  Description:
+    Task handles declared in this header file can be used by the application
+    to control the behavior of the tasks.
 
-  Description
-    This file implements the interface to the Cache System Service Library.
-
-*******************************************************************************/
+  Remarks:
+    None
+ *******************************************************************************/
 
 // DOM-IGNORE-BEGIN
 /*******************************************************************************
-* Copyright (C) 2019 Microchip Technology Inc. and its subsidiaries.
+* Copyright (C) 2023 Microchip Technology Inc. and its subsidiaries.
 *
 * Subject to your compliance with these terms, you may use Microchip software
 * and any derivatives exclusively with Microchip products. It is your
@@ -37,70 +37,20 @@
 * FULLEST EXTENT ALLOWED BY LAW, MICROCHIP'S TOTAL LIABILITY ON ALL CLAIMS IN
 * ANY WAY RELATED TO THIS SOFTWARE WILL NOT EXCEED THE AMOUNT OF FEES, IF ANY,
 * THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
-*******************************************************************************/
+ *******************************************************************************/
 // DOM-IGNORE-END
+
+#ifndef SYS_TASKS_H
+#define SYS_TASKS_H
 
 // *****************************************************************************
 // *****************************************************************************
 // Section: Included Files
 // *****************************************************************************
 // *****************************************************************************
-#include "device.h"
-#include "device_cache.h"
-#include "system/cache/sys_cache.h"
 
-// *****************************************************************************
-// *****************************************************************************
-// Section: System Cache Interface Functions
-// *****************************************************************************
-// *****************************************************************************
-void SYS_CACHE_EnableCaches (void)
-{
-}
+#include "configuration.h"
+#include "definitions.h"
 
-void SYS_CACHE_DisableCaches (void)
-{
-}
-void SYS_CACHE_EnableICache (void)
-{
-}
 
-void SYS_CACHE_DisableICache (void)
-{
-}
-
-void SYS_CACHE_InvalidateICache (void)
-{
-}
-
-void SYS_CACHE_EnableDCache (void)
-{
-}
-
-void SYS_CACHE_DisableDCache (void)
-{
-}
-
-void SYS_CACHE_InvalidateDCache (void)
-{
-}
-
-void SYS_CACHE_CleanDCache (void)
-{
-}
-
-void SYS_CACHE_CleanInvalidateDCache (void)
-{
-}
-
-void SYS_CACHE_InvalidateDCache_by_Addr (uint32_t *addr, int32_t size)
-{
-}
-
-void SYS_CACHE_CleanDCache_by_Addr (uint32_t *addr, int32_t size)
-{
-}
-
-void SYS_CACHE_CleanInvalidateDCache_by_Addr (uint32_t *addr, int32_t size)
-{
-}
+#endif //SYS_TASKS_H
