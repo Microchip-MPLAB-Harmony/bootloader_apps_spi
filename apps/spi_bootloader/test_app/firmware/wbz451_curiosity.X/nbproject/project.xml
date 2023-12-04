@@ -3,15 +3,15 @@
     <type>com.microchip.mplab.nbide.embedded.makeproject</type>
     <configuration>
         <data xmlns="http://www.netbeans.org/ns/make-project/1">
-            <name>spi_bootloader_pic32cz_ca80_curiosity_ultra</name>
-            <creation-uuid>b157e430-30d7-40e1-9131-e1a65a186308</creation-uuid>
+            <name>spi_bootloader_test_app_wbz451_curiosity</name>
+            <creation-uuid>aae13f14-2f6c-412e-a75f-3b28bb491588</creation-uuid>
             <make-project-type>0</make-project-type>
             <sourceEncoding>ISO-8859-1</sourceEncoding>
             <make-dep-projects/>
             <sourceRootList/>
             <confList>
                 <confElem>
-                    <name>pic32cz_ca80_curiosity_ultra</name>
+                    <name>wbz451_curiosity</name>
                     <type>2</type>
                 </confElem>
             </confList>
