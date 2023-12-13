@@ -49,8 +49,8 @@
 #include <stddef.h>
 #include <stdbool.h>
 #include "peripheral/sercom/spi_slave/plib_sercom3_spi_slave.h"
-#include "bootloader/bootloader_spi.h"
 #include "peripheral/fcw/plib_fcw.h"
+#include "bootloader/bootloader_spi.h"
 #include "peripheral/evsys/plib_evsys.h"
 #include "peripheral/port/plib_port.h"
 #include "peripheral/clock/plib_clock.h"

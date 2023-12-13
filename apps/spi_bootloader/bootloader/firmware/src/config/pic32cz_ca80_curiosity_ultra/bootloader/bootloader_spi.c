@@ -278,7 +278,7 @@ static void BL_SPI_CommandParser(void)
             break;
     }
 
-    if (IS_BIT_SET(spiBLData.status, BL_STATUS_BIT_BUSY))
+    if (IS_BIT_SET(spiBLData.status, BL_STATUS_BIT_BUSY) == false)
     {
         SERCOM3_SPI_Ready();
     }
