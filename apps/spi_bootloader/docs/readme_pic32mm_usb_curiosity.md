@@ -47,6 +47,9 @@ To build the application, refer to the following table and open the project usin
 - Connect a ground wire between Host development kit and Target development kit
 - Connect the Debug USB port on the Host development kit to the computer using a micro USB cable
 - Connect the Debug USB port on the Target development kit to the computer using a micro USB cable
+- Install an [USB UART click board](https://www.mikroe.com/usb-uart-click) on to the mikroBUS socket J4
+- Connect mini USB cable between PC and the [USB UART click board](https://www.mikroe.com/usb-uart-click)
+  - *Note: Ensure that the series resistors on the mikroBUS headers are of value 0 Ohms*
 
 ## Building and Configuring SPI Host Applications
 
