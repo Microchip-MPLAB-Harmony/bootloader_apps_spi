@@ -55,37 +55,37 @@
 // *****************************************************************************
 // *****************************************************************************
 
-#define SET_BIT(reg, bits)                      (reg |= (bits))
-#define CLR_BIT(reg, bits)                      (reg &= ~(bits))
-#define IS_BIT_SET(reg, bit)                    ((reg & bit)? true:false)
+#define SET_BIT(reg, bits)                      ((reg) |= (bits))
+#define CLR_BIT(reg, bits)                      ((reg) &= ~(bits))
+#define IS_BIT_SET(reg, bit)                    (((reg) & (bit))? (true):(false))
 
-#define BL_BUFFER_SIZE                          ERASE_BLOCK_SIZE + sizeof(uint32_t)
+#define BL_BUFFER_SIZE                          ((ERASE_BLOCK_SIZE) + (sizeof(uint32_t)))
 
 /* MSB bit is set for the spi master to decide if a slave is present or not.
  * If slave is not present, the read value may be 0x00 or 0xFF.
  */
-#define BL_STATUS_READY                         (0x80)
+#define BL_STATUS_READY                         (0x80U)
 
-#define BL_STATUS_BIT_BUSY                      (0x01 << 0)
-#define BL_STATUS_BIT_INVALID_COMMAND           (0x01 << 1)
-#define BL_STATUS_BIT_INVALID_MEM_ADDR          (0x01 << 2)
-#define BL_STATUS_BIT_COMMAND_EXECUTION_ERROR   (0x01 << 3)      //Valid only when BL_STATUS_BIT_BUSY is 0
-#define BL_STATUS_BIT_CRC_ERROR                 (0x01 << 4)
-#define BL_STATUS_BIT_COMM_ERROR                (0x01 << 5)
+#define BL_STATUS_BIT_BUSY                      ((uint8_t)0x01U << 0)
+#define BL_STATUS_BIT_INVALID_COMMAND           ((uint8_t)0x01U << 1)
+#define BL_STATUS_BIT_INVALID_MEM_ADDR          ((uint8_t)0x01U << 2)
+#define BL_STATUS_BIT_COMMAND_EXECUTION_ERROR   ((uint8_t)0x01U << 3)      //Valid only when BL_STATUS_BIT_BUSY is 0
+#define BL_STATUS_BIT_CRC_ERROR                 ((uint8_t)0x01U << 4)
+#define BL_STATUS_BIT_COMM_ERROR                ((uint8_t)0x01U << 5)
 #define BL_STATUS_BIT_ALL                       (BL_STATUS_BIT_BUSY | BL_STATUS_BIT_INVALID_COMMAND | BL_STATUS_BIT_INVALID_MEM_ADDR | \
                                                  BL_STATUS_BIT_COMMAND_EXECUTION_ERROR | BL_STATUS_BIT_CRC_ERROR | BL_STATUS_BIT_COMM_ERROR)
 
-typedef enum
-{
-    BL_COMMAND_UNLOCK = 0xA0,
-    BL_COMMAND_ERASE = 0xA1,
-    BL_COMMAND_PROGRAM = 0xA2,
-    BL_COMMAND_VERIFY = 0xA3,
-    BL_COMMAND_RESET = 0xA4,
-    BL_COMMAND_READ_STATUS = 0xA5,
-    BL_COMMAND_READ_VERSION = 0xA8,
-    BL_COMMAND_MAX,
-}BL_COMMAND;
+
+#define     BL_COMMAND_UNLOCK         0xA0U
+#define     BL_COMMAND_ERASE          0xA1U
+#define     BL_COMMAND_PROGRAM        0xA2U
+#define     BL_COMMAND_VERIFY         0xA3U
+#define     BL_COMMAND_RESET          0xA4U
+#define     BL_COMMAND_READ_STATUS    0xA5U
+#define     BL_COMMAND_READ_VERSION    0xA8U
+#define     BL_COMMAND_MAX             0XA9U
+
+typedef uint8_t BL_COMMAND;
 
 typedef enum
 {
@@ -170,11 +170,11 @@ static bool spiBLActive     = false;
 static void BL_SPI_SubmitWriteRequest(void)
 {
     /* NVM requires data buffer to align to 32-bit (word) boundary. Move the buffer content to align to 32-bit boundary. */
-    if ((uint32_t)spiBLData.cmd.programCommand.data & 0x03)
+    if (((uint32_t)spiBLData.cmd.programCommand.data & 0x03U) != 0U)
     {
-        spiBLData.dataBufferAlignOffset = 4 - ((uint32_t)spiBLData.cmd.programCommand.data & 0x03);
+        spiBLData.dataBufferAlignOffset = (uint8_t)(4U - ((uint32_t)spiBLData.cmd.programCommand.data & 0x03U));
 
-        memmove(&spiBLData.cmd.programCommand.data[spiBLData.dataBufferAlignOffset], spiBLData.cmd.programCommand.data, spiBLData.cmd.programCommand.nBytes);
+        (void) memmove(&spiBLData.cmd.programCommand.data[spiBLData.dataBufferAlignOffset], spiBLData.cmd.programCommand.data, spiBLData.cmd.programCommand.nBytes);
     }
     else
     {
@@ -254,7 +254,7 @@ static void BL_SPI_CommandParser(void)
 
         case BL_COMMAND_READ_STATUS:
 
-            SPI0_Write(&spiBLData.status, 1);
+            (void) SPI0_Write(&spiBLData.status, 1);
             CLR_BIT(spiBLData.status, BL_STATUS_BIT_ALL);
             break;
 
@@ -263,22 +263,22 @@ static void BL_SPI_CommandParser(void)
             spiBLData.btlVersion = bootloader_GetVersion();
 
             /* Swap Major and Minor Number */
-            spiBLData.btlVersion = (((spiBLData.btlVersion << 8) & 0xFF00) | ((spiBLData.btlVersion >> 8) & 0xFF));
+            spiBLData.btlVersion = (((spiBLData.btlVersion << 8) & 0xFF00U) | ((spiBLData.btlVersion >> 8) & 0xFFU));
 
-            SPI0_Write(&spiBLData.btlVersion, 2);
+            (void) SPI0_Write(&spiBLData.btlVersion, 2);
 
             break;
 
         default:
             /* 0xFF is used as a dummy byte to read the status by the host */
-            if (spiBLData.cmd.readBuffer[0] != 0xFF)
+            if (spiBLData.cmd.readBuffer[0] != 0xFFU)
             {
                 SET_BIT(spiBLData.status, BL_STATUS_BIT_INVALID_COMMAND);
             }
             break;
     }
 
-    if (!IS_BIT_SET(spiBLData.status, BL_STATUS_BIT_BUSY))
+    if (IS_BIT_SET(spiBLData.status, BL_STATUS_BIT_BUSY) == false)
     {
         SPI0_Ready();
     }
@@ -292,17 +292,20 @@ static void BL_SPI_FlashTask(void)
             // Lock region size is always bigger than the row size
             EFC_RegionUnlock(spiBLData.cmd.eraseCommand.memAddr);
 
-            while(EFC_IsBusy() == true);
+            while(EFC_IsBusy() == true)
+            {
+                /* Nothing to do */
+            }
 
             /* Erase the Current row */
-            EFC_SectorErase(spiBLData.cmd.eraseCommand.memAddr);
+            (void) EFC_SectorErase(spiBLData.cmd.eraseCommand.memAddr);
 
             spiBLData.flashState = BL_FLASH_STATE_ERASE_BUSY_POLL;
 
             break;
 
         case BL_FLASH_STATE_WRITE:
-            EFC_PageWrite((uint32_t*)&spiBLData.cmd.programCommand.data[spiBLData.dataBufferAlignOffset + spiBLData.nFlashBytesWritten], (spiBLData.cmd.programCommand.memAddr + spiBLData.nFlashBytesWritten));
+            (void) EFC_PageWrite((void *)&spiBLData.cmd.programCommand.data[spiBLData.dataBufferAlignOffset + spiBLData.nFlashBytesWritten], (spiBLData.cmd.programCommand.memAddr + spiBLData.nFlashBytesWritten));
 
             spiBLData.flashState = BL_FLASH_STATE_WRITE_BUSY_POLL;
 
@@ -356,16 +359,19 @@ static void BL_SPI_FlashTask(void)
             break;
 
         default:
+                /* Do Nothing */
             break;
     }
 }
 
+/* MISRA C-2012 Rule 11.8 deviated below. Deviation record ID -
+   H3_MISRAC_2012_R_11_8_DR_1 */
 static void BL_SPI_EventHandler(uintptr_t context )
 {
     if (SPI0_ErrorGet() == SPI_SLAVE_ERROR_NONE)
     {
         spiBLData.nReadBytes = SPI0_Read((void*)spiBLData.cmd.readBuffer, SPI0_ReadCountGet());
-        if(spiBLData.nReadBytes == 0)
+        if(spiBLData.nReadBytes == 0U)
         {
             SPI0_Ready();
         }
@@ -376,6 +382,7 @@ static void BL_SPI_EventHandler(uintptr_t context )
         SPI0_Ready();
     }
 }
+/* MISRAC 2012 deviation block end */
 
 // *****************************************************************************
 // *****************************************************************************
@@ -396,7 +403,7 @@ void bootloader_SPI_Tasks(void)
 
     do
     {
-        if (spiBLData.nReadBytes)
+        if (spiBLData.nReadBytes != 0U)
         {
             spiBLData.nReadBytes = 0;
 

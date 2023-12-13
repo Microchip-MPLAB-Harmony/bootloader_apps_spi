@@ -25,10 +25,14 @@
 
 #include "definitions.h" /* for potential custom handler names */
 #include "device_vectors.h"
+#include "interrupts.h"
 #include <libpic32c.h>
 #include <sys/cdefs.h>
 #include <stdbool.h>
 
+/* MISRAC 2012 deviation block start */
+/* MISRA C-2012 Rule 21.2 deviated 1 times. Deviation record ID -  H3_MISRAC_2012_R_21_2_DR_1 */
+/* MISRA C-2012 Rule 8.6 deviated 7 times.  Deviation record ID -  H3_MISRAC_2012_R_8_6_DR_1 */
 /* Initialize segments */
 extern uint32_t _sfixed;
 extern void _ram_end_(void);
@@ -45,33 +49,45 @@ extern int main(void);
 extern uint32_t _sdata, _edata, _etext;
 extern uint32_t _sbss, _ebss;
 extern uint32_t _vectors_loadaddr;
+/* MISRAC 2012 deviation block end */
 
 void __attribute__((noinline, section(".romfunc.Reset_Handler"))) Reset_Handler(void)
 {
+    register uint32_t count;
 
     uint32_t *pSrc, *pDst;
+    uintptr_t src, dst;
 
     uint32_t i;
-    pSrc = (uint32_t *) &_vectors_loadaddr; /* flash address */
-    pDst = (uint32_t *) &_sfixed;
+    src = (uintptr_t)&_vectors_loadaddr; /* flash address */
+    pSrc = (uint32_t *)src;
+    dst = (uintptr_t)&_sfixed;
+    pDst = (uint32_t *)dst;
 
     /* Copy .vectors section from flash to RAM */
-    for (i = 0; i < sizeof(H3DeviceVectors)/4; i++)
+    for (i = 0U; i < sizeof(H3DeviceVectors)/4U; i++)
     {
-        *pDst++ = *pSrc++;
+        pDst[i] = pSrc[i];
     }
 
-    pSrc = (uint32_t *) &_etext; /* flash functions start after .text */
-    pDst = (uint32_t *) &_sdata;  /* boundaries of .data area to init */
+    src = (uintptr_t)&_etext;
+    pSrc = (uint32_t *)src;      /* flash functions start after .text */
+    dst = (uintptr_t)&_sdata;
+    pDst = (uint32_t *)dst;      /* boundaries of .data area to init */
 
     /* Init .data */
-    while (pDst < &_edata)
-        *pDst++ = *pSrc++;
+    for (count = 0U; count < (((uint32_t)&_edata - (uint32_t)dst) / 4U); count++)
+    {
+        pDst[count] = pSrc[count];
+    }
 
     /* Init .bss */
-    pDst = &_sbss;
-    while (pDst < &_ebss)
-      *pDst++ = 0;
+    dst = (uintptr_t)&_sbss;
+    pDst = (uint32_t *)dst;
+    for (count = 0U; count < (((uint32_t)&_ebss - (uint32_t)dst) / 4U); count++)
+    {
+        pDst[count] = 0U;
+    }
 
 #if defined (__VTOR_PRESENT) && (__VTOR_PRESENT == 1U)
     /*  Set the vector-table base address in RAM */
@@ -80,7 +96,7 @@ void __attribute__((noinline, section(".romfunc.Reset_Handler"))) Reset_Handler(
 #endif /* #if defined (__VTOR_PRESENT) && (__VTOR_PRESENT == 1U) */
 
      /* Branch to application's main function */
-    main();
+    (void)main();
 
 #if (defined(__DEBUG) || defined(__DEBUG_D)) && defined(__XC32)
     __builtin_software_breakpoint();
