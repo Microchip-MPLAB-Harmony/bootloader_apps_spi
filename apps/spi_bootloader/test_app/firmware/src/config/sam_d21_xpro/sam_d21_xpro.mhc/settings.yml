@@ -1,6 +1,6 @@
-format_version: v1.0
 configName: sam_d21_xpro
 folderName: sam_d21_xpro
+format_version: v1.0
 frameworkPath: C:\projects\harmony_3
 processor: ATSAMD21J18A
 projectName: spi_bootloader_test_app_sam_d21_xpro
@@ -11,4 +11,4 @@ settings:
   TRUSTZONE: 'false'
   CMSISPath: dev_packs\arm\CMSIS\5.8.0
   MERGE_STRATEGY: USER_ALL
-  DFPPath: dev_packs\Microchip\SAMD21_DFP\3.6.144\samd21a\atdf\ATSAMD21J18A.atdf
+  DFPPath: SAMD21_DFP\3.6.144
