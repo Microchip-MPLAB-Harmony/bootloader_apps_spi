@@ -48,8 +48,8 @@
 #include <stdint.h>
 #include <stddef.h>
 #include <stdbool.h>
-#include "bootloader/bootloader_spi.h"
 #include "peripheral/sercom/spi_slave/plib_sercom1_spi_slave.h"
+#include "bootloader/bootloader_spi.h"
 #include "peripheral/evsys/plib_evsys.h"
 #include "peripheral/clk/plib_clk.h"
 #include "peripheral/gpio/plib_gpio.h"
