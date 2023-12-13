@@ -48,9 +48,9 @@
 // Section: Included Files
 // *****************************************************************************
 // *****************************************************************************
-
 #include "interrupts.h"
 #include "definitions.h"
+
 
 
 // *****************************************************************************
@@ -60,14 +60,23 @@
 // *****************************************************************************
 
 
-void CHANGE_NOTICE_C_InterruptHandler( void );
-void SPI3_ERR_InterruptHandler( void );
-void SPI3_TX_InterruptHandler( void );
-void SPI3_RX_InterruptHandler( void );
-
-
-
 /* All the handlers are defined here.  Each will call its PLIB-specific function. */
+// *****************************************************************************
+// *****************************************************************************
+// Section: System Interrupt Vector declarations
+// *****************************************************************************
+// *****************************************************************************
+void CHANGE_NOTICE_C_Handler (void);
+void SPI3_ERR_Handler (void);
+void SPI3_TX_Handler (void);
+void SPI3_RX_Handler (void);
+
+
+// *****************************************************************************
+// *****************************************************************************
+// Section: System Interrupt Vector definitions
+// *****************************************************************************
+// *****************************************************************************
 void __ISR(_CHANGE_NOTICE_C_VECTOR, ipl1SOFT) CHANGE_NOTICE_C_Handler (void)
 {
     CHANGE_NOTICE_C_InterruptHandler();

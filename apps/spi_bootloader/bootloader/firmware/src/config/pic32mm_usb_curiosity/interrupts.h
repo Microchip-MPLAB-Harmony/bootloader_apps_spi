@@ -57,6 +57,11 @@
 // *****************************************************************************
 // *****************************************************************************
 
+void CHANGE_NOTICE_C_InterruptHandler( void );
+void SPI3_ERR_InterruptHandler( void );
+void SPI3_TX_InterruptHandler( void );
+void SPI3_RX_InterruptHandler( void );
+
 
 
 #endif // INTERRUPTS_H

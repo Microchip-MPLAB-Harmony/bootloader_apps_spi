@@ -41,6 +41,7 @@
 #include "plib_spi3_slave.h"
 #include "peripheral/gpio/plib_gpio.h"
 #include <string.h>
+#include "interrupts.h"
 // *****************************************************************************
 // *****************************************************************************
 // Section: SPI3 Slave Implementation
@@ -53,20 +54,20 @@
 #define SPI3_READ_BUFFER_SIZE            2080
 #define SPI3_WRITE_BUFFER_SIZE           256
 
-static uint8_t SPI3_ReadBuffer[SPI3_READ_BUFFER_SIZE];
-static uint8_t SPI3_WriteBuffer[SPI3_WRITE_BUFFER_SIZE];
+volatile static uint8_t SPI3_ReadBuffer[SPI3_READ_BUFFER_SIZE];
+volatile static uint8_t SPI3_WriteBuffer[SPI3_WRITE_BUFFER_SIZE];
 
 
 /* Global object to save SPI Exchange related data */
-SPI_SLAVE_OBJECT spi3Obj;
+volatile static SPI_SLAVE_OBJECT spi3Obj;
 
-#define SPI3_CON_CKP                        (0 << _SPI3CON_CKP_POSITION)
-#define SPI3_CON_CKE                        (1 << _SPI3CON_CKE_POSITION)
-#define SPI3_CON_MODE_32_MODE_16            (0 << _SPI3CON_MODE16_POSITION)
-#define SPI3_CON_ENHBUF                     (1 << _SPI3CON_ENHBUF_POSITION)
-#define SPI3_CON_STXISEL                    (3 << _SPI3CON_STXISEL_POSITION)
-#define SPI3_CON_SRXISEL                    (1 << _SPI3CON_SRXISEL_POSITION)
-#define SPI3_CON_SSEN                       (1 << _SPI3CON_SSEN_POSITION)
+#define SPI3_CON_CKP                        (0UL << _SPI3CON_CKP_POSITION)
+#define SPI3_CON_CKE                        (1UL << _SPI3CON_CKE_POSITION)
+#define SPI3_CON_MODE_32_MODE_16            (0UL << _SPI3CON_MODE16_POSITION)
+#define SPI3_CON_ENHBUF                     (1UL << _SPI3CON_ENHBUF_POSITION)
+#define SPI3_CON_STXISEL                    (3UL << _SPI3CON_STXISEL_POSITION)
+#define SPI3_CON_SRXISEL                    (1UL << _SPI3CON_SRXISEL_POSITION)
+#define SPI3_CON_SSEN                       (1UL << _SPI3CON_SSEN_POSITION)
 
 #define SPI3_ENABLE_RX_INT()                IEC1SET = 0x20000
 #define SPI3_CLEAR_RX_INT_FLAG()            IFS1CLR = 0x20000
@@ -80,6 +81,17 @@ SPI_SLAVE_OBJECT spi3Obj;
 
 /* Forward declarations */
 static void SPI3_CS_Handler(GPIO_PIN pin, uintptr_t context);
+
+static void mem_copy(volatile void* pDst, volatile void* pSrc, uint32_t nBytes)
+{
+    volatile uint8_t* pSource = (volatile uint8_t*)pSrc;
+    volatile uint8_t* pDest = (volatile uint8_t*)pDst;
+
+    for (uint32_t i = 0U; i < nBytes; i++)
+    {
+        pDest[i] = pSource[i];
+    }
+}
 
 void SPI3_Initialize ( void )
 {
@@ -105,7 +117,7 @@ void SPI3_Initialize ( void )
     MSTEN = 0
     CKP = 0
     CKE = 1
-    MODE<32,16> = 0
+    MODE< 32,16 > = 0
     ENHBUF = 1
     */
 
@@ -127,7 +139,7 @@ void SPI3_Initialize ( void )
     GPIO_PinWrite((GPIO_PIN)SPI3_BUSY_PIN, 0);
 
     /* Register callback and enable notifications on Chip Select logic level change */
-    GPIO_PinInterruptCallbackRegister(SPI3_CS_PIN, SPI3_CS_Handler, (uintptr_t)NULL);
+    (void)GPIO_PinInterruptCallbackRegister(SPI3_CS_PIN, SPI3_CS_Handler, 0U);
     GPIO_PinInterruptEnable(SPI3_CS_PIN);
 
     /* Enable SPI3 RX and Error Interrupts. TX interrupt will be enabled when a SPI write is submitted. */
@@ -149,7 +161,7 @@ size_t SPI3_Read(void* pRdBuffer, size_t size)
         rdSize = rdInIndex;
     }
 
-    memcpy(pRdBuffer, SPI3_ReadBuffer, rdSize);
+   (void) mem_copy(pRdBuffer, SPI3_ReadBuffer, rdSize);
 
     return rdSize;
 }
@@ -158,6 +170,7 @@ size_t SPI3_Read(void* pRdBuffer, size_t size)
 size_t SPI3_Write(void* pWrBuffer, size_t size )
 {
     size_t wrSize = size;
+    size_t wrOutIndex = 0;
 
     SPI3_DISABLE_TX_INT();
 
@@ -166,16 +179,18 @@ size_t SPI3_Write(void* pWrBuffer, size_t size )
         wrSize = SPI3_WRITE_BUFFER_SIZE;
     }
 
-    memcpy(SPI3_WriteBuffer, pWrBuffer, wrSize);
+    (void) mem_copy(SPI3_WriteBuffer, pWrBuffer, wrSize);
 
     spi3Obj.nWrBytes = wrSize;
-    spi3Obj.wrOutIndex = 0;
 
     /* Fill up the FIFO as long as there are empty elements */
-    while ((!(SPI3STAT & _SPI3STAT_SPITBF_MASK)) && (spi3Obj.wrOutIndex < spi3Obj.nWrBytes))
+    while ((!(SPI3STAT & _SPI3STAT_SPITBF_MASK)) && (wrOutIndex < wrSize))
     {
-        SPI3BUF = SPI3_WriteBuffer[spi3Obj.wrOutIndex++];
+        SPI3BUF = SPI3_WriteBuffer[wrOutIndex];
+        wrOutIndex++;
     }
+
+    spi3Obj.wrOutIndex = wrOutIndex;
 
     /* Enable TX interrupt */
     SPI3_ENABLE_TX_INT();
@@ -229,9 +244,9 @@ SPI_SLAVE_ERROR SPI3_ErrorGet(void)
     return errorStatus;
 }
 
-static void SPI3_CS_Handler(GPIO_PIN pin, uintptr_t context)
+static void __attribute__((used)) SPI3_CS_Handler(GPIO_PIN pin, uintptr_t context)
 {
-    bool activeState = 0;
+    bool activeState = false;
 
     if (GPIO_PinRead((GPIO_PIN)SPI3_CS_PIN) == activeState)
     {
@@ -245,7 +260,9 @@ static void SPI3_CS_Handler(GPIO_PIN pin, uintptr_t context)
     {
         /* Give application callback only if RX interrupt is not preempted and RX interrupt is not pending to be serviced */
 
-        if ((spi3Obj.rxInterruptActive == false) && ((IFS1 & _IFS1_SPI3RXIF_MASK) == 0))
+        bool rxInterruptActive = spi3Obj.rxInterruptActive;
+
+        if (((IFS1 & _IFS1_SPI3RXIF_MASK) == 0) && (rxInterruptActive == false))
         {
             /* CS is de-asserted */
             spi3Obj.transferIsBusy = false;
@@ -255,7 +272,9 @@ static void SPI3_CS_Handler(GPIO_PIN pin, uintptr_t context)
 
             if(spi3Obj.callback != NULL)
             {
-                spi3Obj.callback(spi3Obj.context);
+                uintptr_t context_val = spi3Obj.context;
+
+                spi3Obj.callback(context_val);
             }
 
             /* Clear the read index. Application must read out the data by calling SPI3_Read API in the callback */
@@ -271,9 +290,9 @@ static void SPI3_CS_Handler(GPIO_PIN pin, uintptr_t context)
     }
 }
 
-void SPI3_ERR_InterruptHandler (void)
+void __attribute__((used)) SPI3_ERR_InterruptHandler (void)
 {
-    spi3Obj.errorStatus = (SPI3STAT & _SPI3STAT_SPIROV_MASK);
+    spi3Obj.errorStatus =(SPI3STAT & _SPI3STAT_SPIROV_MASK);
 
     /* Clear the receive overflow flag */
     SPI3STATCLR = _SPI3STAT_SPIROV_MASK;
@@ -281,40 +300,51 @@ void SPI3_ERR_InterruptHandler (void)
     SPI3_CLEAR_ERR_INT_FLAG();
 }
 
-void SPI3_TX_InterruptHandler (void)
+void __attribute__((used)) SPI3_TX_InterruptHandler (void)
 {
+    size_t wrOutIndex = spi3Obj.wrOutIndex;
+    size_t nWrBytes = spi3Obj.nWrBytes;
+
     /* Fill up the FIFO as long as there are empty elements */
-    while ((!(SPI3STAT & _SPI3STAT_SPITBF_MASK)) && (spi3Obj.wrOutIndex < spi3Obj.nWrBytes))
+    while ((!(SPI3STAT & _SPI3STAT_SPITBF_MASK)) && (wrOutIndex < nWrBytes))
     {
-        SPI3BUF = SPI3_WriteBuffer[spi3Obj.wrOutIndex++];
+        SPI3BUF = SPI3_WriteBuffer[wrOutIndex];
+        wrOutIndex++;
     }
+
+    spi3Obj.wrOutIndex = wrOutIndex;
 
     /* Clear the transmit interrupt flag */
     SPI3_CLEAR_TX_INT_FLAG();
 
-    if (spi3Obj.wrOutIndex == spi3Obj.nWrBytes)
+    if (spi3Obj.wrOutIndex == nWrBytes)
     {
         /* Nothing to transmit. Disable transmit interrupt. The last byte sent by the master will be shifted out automatically*/
         SPI3_DISABLE_TX_INT();
     }
 }
 
-void SPI3_RX_InterruptHandler (void)
+void __attribute__((used)) SPI3_RX_InterruptHandler (void)
 {
     uint32_t receivedData = 0;
 
     spi3Obj.rxInterruptActive = true;
+
+    size_t rdInIndex = spi3Obj.rdInIndex;
 
     while (!(SPI3STAT & _SPI3STAT_SPIRBE_MASK))
     {
         /* Receive buffer is not empty. Read the received data. */
         receivedData = SPI3BUF;
 
-        if (spi3Obj.rdInIndex < SPI3_READ_BUFFER_SIZE)
+        if (rdInIndex < SPI3_READ_BUFFER_SIZE)
         {
-            SPI3_ReadBuffer[spi3Obj.rdInIndex++] = receivedData;
+            SPI3_ReadBuffer[rdInIndex] = (uint8_t)receivedData;
+            rdInIndex++;
         }
     }
+
+    spi3Obj.rdInIndex = rdInIndex;
 
     /* Clear the receive interrupt flag */
     SPI3_CLEAR_RX_INT_FLAG();
@@ -334,7 +364,9 @@ void SPI3_RX_InterruptHandler (void)
 
         if(spi3Obj.callback != NULL)
         {
-            spi3Obj.callback(spi3Obj.context);
+            uintptr_t context = spi3Obj.context;
+
+            spi3Obj.callback(context);
         }
 
         /* Clear the read index. Application must read out the data by calling SPI3_Read API in the callback */
