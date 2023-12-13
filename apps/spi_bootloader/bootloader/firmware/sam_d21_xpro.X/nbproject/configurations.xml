@@ -1,13 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version='1.0' encoding='UTF-8'?>
 <configurationDescriptor version="65">
   <logicalFolder name="root" displayName="root" projectFiles="true">
-    <logicalFolder name="HeaderFiles"
-                   displayName="Header Files"
-                   projectFiles="true">
+    <logicalFolder name="HeaderFiles" displayName="Header Files" projectFiles="true">
       <logicalFolder name="config" displayName="config" projectFiles="true">
-        <logicalFolder name="sam_d21_xpro"
-                       displayName="sam_d21_xpro"
-                       projectFiles="true">
+        <logicalFolder name="sam_d21_xpro" displayName="sam_d21_xpro" projectFiles="true">
           <logicalFolder name="bootloader" displayName="bootloader" projectFiles="true">
             <itemPath>../src/config/sam_d21_xpro/bootloader/bootloader_common.h</itemPath>
             <itemPath>../src/config/sam_d21_xpro/bootloader/bootloader_spi.h</itemPath>
@@ -50,9 +46,7 @@
         </logicalFolder>
       </logicalFolder>
       <logicalFolder name="packs" displayName="packs" projectFiles="true">
-        <logicalFolder name="ATSAMD21J18A_DFP"
-                       displayName="ATSAMD21J18A_DFP"
-                       projectFiles="true">
+        <logicalFolder name="ATSAMD21J18A_DFP" displayName="ATSAMD21J18A_DFP" projectFiles="true">
           <logicalFolder name="component" displayName="component" projectFiles="true">
             <itemPath>../src/packs/ATSAMD21J18A_DFP/component/dsu.h</itemPath>
             <itemPath>../src/packs/ATSAMD21J18A_DFP/component/eic.h</itemPath>
@@ -143,18 +137,12 @@
         </logicalFolder>
       </logicalFolder>
     </logicalFolder>
-    <logicalFolder name="LinkerScript"
-                   displayName="Linker Files"
-                   projectFiles="true">
+    <logicalFolder name="LinkerScript" displayName="Linker Files" projectFiles="true">
       <itemPath>../src/config/sam_d21_xpro/btl.ld</itemPath>
     </logicalFolder>
-    <logicalFolder name="SourceFiles"
-                   displayName="Source Files"
-                   projectFiles="true">
+    <logicalFolder name="SourceFiles" displayName="Source Files" projectFiles="true">
       <logicalFolder name="config" displayName="config" projectFiles="true">
-        <logicalFolder name="sam_d21_xpro"
-                       displayName="sam_d21_xpro"
-                       projectFiles="true">
+        <logicalFolder name="sam_d21_xpro" displayName="sam_d21_xpro" projectFiles="true">
           <logicalFolder name="bootloader" displayName="bootloader" projectFiles="true">
             <itemPath>../src/config/sam_d21_xpro/bootloader/bootloader_common.c</itemPath>
             <itemPath>../src/config/sam_d21_xpro/bootloader/bootloader_spi.c</itemPath>
@@ -196,9 +184,7 @@
       <itemPath>../src/config/sam_d21_xpro/pin_configurations.csv</itemPath>
       <itemPath>../src/main.c</itemPath>
     </logicalFolder>
-    <logicalFolder name="ExternalFiles"
-                   displayName="Important Files"
-                   projectFiles="false">
+    <logicalFolder name="ExternalFiles" displayName="Important Files" projectFiles="false">
       <itemPath>Makefile</itemPath>
       <itemPath>sam_d21_xpro.mc3</itemPath>
     </logicalFolder>
@@ -209,11 +195,11 @@
       <toolsSet>
         <developmentServer>localhost</developmentServer>
         <targetDevice>ATSAMD21J18A</targetDevice>
-        <targetHeader></targetHeader>
-        <targetPluginBoard></targetPluginBoard>
+        <targetHeader/>
+        <targetPluginBoard/>
         <platformTool>EdbgTool</platformTool>
         <languageToolchain>XC32</languageToolchain>
-        <languageToolchainVersion>4.10</languageToolchainVersion>
+        <languageToolchainVersion>4.35</languageToolchainVersion>
         <platform>3</platform>
       </toolsSet>
       <packs>
@@ -232,7 +218,7 @@
         <loading>
           <useAlternateLoadableFile>false</useAlternateLoadableFile>
           <parseOnProdLoad>false</parseOnProdLoad>
-          <alternateLoadableFile></alternateLoadableFile>
+          <alternateLoadableFile/>
         </loading>
         <subordinates>
         </subordinates>
@@ -240,9 +226,9 @@
       <makeCustomizationType>
         <makeCustomizationPreStepEnabled>false</makeCustomizationPreStepEnabled>
         <makeUseCleanTarget>false</makeUseCleanTarget>
-        <makeCustomizationPreStep></makeCustomizationPreStep>
+        <makeCustomizationPreStep/>
         <makeCustomizationPostStepEnabled>false</makeCustomizationPostStepEnabled>
-        <makeCustomizationPostStep></makeCustomizationPostStep>
+        <makeCustomizationPostStep/>
         <makeCustomizationPutChecksumInUserID>false</makeCustomizationPutChecksumInUserID>
         <makeCustomizationEnableLongLines>false</makeCustomizationEnableLongLines>
         <makeCustomizationNormalizeHexFile>false</makeCustomizationNormalizeHexFile>
@@ -256,8 +242,7 @@
         <property key="enable-symbols" value="true"/>
         <property key="enable-unroll-loops" value="false"/>
         <property key="exclude-floating-point" value="false"/>
-        <property key="extra-include-directories"
-                  value="../src;../src/config/sam_d21_xpro;../src/packs/ATSAMD21J18A_DFP;../src/packs/CMSIS/;../src/packs/CMSIS/CMSIS/Core/Include"/>
+        <property key="extra-include-directories" value="../src;../src/config/sam_d21_xpro;../src/packs/ATSAMD21J18A_DFP;../src/packs/CMSIS/;../src/packs/CMSIS/CMSIS/Core/Include"/>
         <property key="generate-16-bit-code" value="false"/>
         <property key="generate-micro-compressed-code" value="false"/>
         <property key="isolate-each-function" value="true"/>
@@ -356,8 +341,7 @@
         <property key="enable-unroll-loops" value="false"/>
         <property key="exceptions" value="true"/>
         <property key="exclude-floating-point" value="false"/>
-        <property key="extra-include-directories"
-                  value="../src;../src/config/sam_d21_xpro;../src/packs/ATSAMD21J18A_DFP;../src/packs/CMSIS/;../src/packs/CMSIS/CMSIS/Core/Include"/>
+        <property key="extra-include-directories" value="../src;../src/config/sam_d21_xpro;../src/packs/ATSAMD21J18A_DFP;../src/packs/CMSIS/;../src/packs/CMSIS/CMSIS/Core/Include"/>
         <property key="generate-16-bit-code" value="false"/>
         <property key="generate-micro-compressed-code" value="false"/>
         <property key="isolate-each-function" value="true"/>
@@ -390,8 +374,7 @@
       </C32Global>
       <EdbgTool>
         <property key="memories.programmemory.ranges" value="0-3ffff"/>
-        <property key="programmerToGoFilePath"
-                  value="C:/microchip/harmony/h3/bootloader_apps_spi/apps/spi_bootloader/bootloader/firmware/sam_d21_xpro.X/debug/sam_d21_xpro/sam_d21_xpro_ptg"/>
+        <property key="programmerToGoFilePath" value="C:/microchip/harmony/h3/bootloader_apps_spi/apps/spi_bootloader/bootloader/firmware/sam_d21_xpro.X/debug/sam_d21_xpro/sam_d21_xpro_ptg"/>
       </EdbgTool>
     </conf>
   </confs>
