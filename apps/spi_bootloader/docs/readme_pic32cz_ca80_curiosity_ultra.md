@@ -21,29 +21,29 @@ To build the application, refer to the following table and open the project usin
 
 | Project Name      | Description                                    |
 | ----------------- | ---------------------------------------------- |
-| bootloader/firmware/pic32cz_ca80_curiosity_ultra.X    | MPLABX Project for [WBZ451 Curiosity Development Board](https://www.microchip.com/en-us/development-tool/ev96b94a)|
+| bootloader/firmware/pic32cz_ca80_curiosity_ultra.X    | MPLABX Project for [PIC32CZ-CA80 Curiosity Ultra board](https://www.microchip.com/en-us/development-tool/ea61x20a)|
 
 
 ### Test Application
 
 | Project Name      | Description                                    |
 | ----------------- | ---------------------------------------------- |
-| test_app/firmware/pic32cz_ca80_curiosity_ultra.X    | MPLABX Project for [WBZ451 Curiosity Development Board](https://www.microchip.com/en-us/development-tool/ev96b94a)|
+| test_app/firmware/pic32cz_ca80_curiosity_ultra.X    | MPLABX Project for [PIC32CZ-CA80 Curiosity Ultra board](https://www.microchip.com/en-us/development-tool/ea61x20a)|
 
 
-## Setting up [WBZ451 Curiosity Development Board](https://www.microchip.com/en-us/development-tool/ev96b94a)
+## Setting up [PIC32CZ-CA80 Curiosity Ultra board](https://www.microchip.com/en-us/development-tool/ea61x20a)
 
 - [SAME54 Xplained Pro Evaluation Kit](https://www.microchip.com/en-us/development-tool/atsame54-xpro) is used for **Host Development kit**
 
-- [WBZ451 Curiosity Development Board](https://www.microchip.com/en-us/development-tool/ev96b94a) is used for **Target Development kit**
+- [PIC32CZ-CA80 Curiosity Ultra board](https://www.microchip.com/en-us/development-tool/ea61x20a) is used for **Target Development kit**
 
     ![spi_bootloader_host_target_connection](../../spi_bootloader/docs/images/spi_bootloader_host_target_connection.png)
 
 - Connect the MOSI Pin 16 (PC04) on EXT2 of the **Host development kit** to the Pin 16 (PC12) on EXT2  of the **Target development kit**
-- Connect the MISO Pin 17 (PC07) on EXT2 of the **Host development kit** to the Pin 18 (PC13) on EXT2 of the **Target development kit**
+- Connect the MISO Pin 17 (PC07) on EXT2 of the **Host development kit** to the Pin 17 (PC15) on EXT2 of the **Target development kit**
 - Connect the CS Pin 15 (PC06) on EXT2 of the **Host development kit** to the Pin 15 (PC14) on EXT2 of the **Target development kit**
-- Connect the SCK Pin 18 (PC05) on EXT2 of the **Host development kit** to the Pin 17 (PC15) on EXT2 of the **Target development kit**
-- Connect the BUSY Pin 09 (PD00) on EXT2 of the **Host development kit** to the Pin 06 (PB25) on EXT1 of the **Target development kit**
+- Connect the SCK Pin 18 (PC05) on EXT2 of the **Host development kit** to the Pin 18 (PC13) on EXT2 of the **Target development kit**
+- Connect the BUSY Pin 09 (PD00) on EXT2 of the **Host development kit** to the Pin 05 (PB25) on EXT1 of the **Target development kit**
 - Connect a ground wire between Host development kit and Target development kit
 - Connect the Debug USB port on the Host development kit to the computer using a micro USB cable
 - Connect the Debug USB port on the Target development kit to the computer using a micro USB cable

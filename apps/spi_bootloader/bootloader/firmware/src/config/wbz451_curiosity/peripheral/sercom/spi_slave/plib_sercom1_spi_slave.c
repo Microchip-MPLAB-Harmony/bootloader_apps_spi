@@ -55,7 +55,7 @@
 // Section: MACROS Definitions
 // *****************************************************************************
 // *****************************************************************************
-#define SERCOM1_SPI_READ_BUFFER_SIZE            600U
+#define SERCOM1_SPI_READ_BUFFER_SIZE            2048U
 #define SERCOM1_SPI_WRITE_BUFFER_SIZE           256U
 
 volatile static uint8_t SERCOM1_SPI_ReadBuffer[SERCOM1_SPI_READ_BUFFER_SIZE];

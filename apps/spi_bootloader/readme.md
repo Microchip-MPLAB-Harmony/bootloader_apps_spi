@@ -42,7 +42,9 @@ The following table provides links to documentation on how to build and run SPI 
 
 | Development Kit |
 |:---------|
+|[PIC32CZ-CA80 Curiosity Ultra board](docs/readme_pic32cz_ca80_curiosity_ultra.md) |
 |[PIC32MM USB Curiosity Development Kit](docs/readme_pic32mm_usb_curiosity.md) |
 |[SAM D21 Xplained Pro Evaluation Kit](docs/readme_sam_d21_xpro.md) |
 |[SAM E54 Xplained Pro Evaluation Kit](docs/readme_sam_e54_xpro.md) |
 |[SAM E70 Xplained Pro Evaluation Kit](docs/readme_sam_e70_xpro.md) |
+|[WBZ451 Curiosity Development Board](docs/readme_wbz451_curiosity.md) |
