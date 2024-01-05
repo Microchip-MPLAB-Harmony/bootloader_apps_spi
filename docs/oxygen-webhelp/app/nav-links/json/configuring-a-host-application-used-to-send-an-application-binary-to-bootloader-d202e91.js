@@ -1,0 +1,1 @@
+define({"topics":[{"title":"<ph>1.3.1<\/ph>\nConfiguring the SDCARD Host applications","href":"GUID-F3AB4AF7-7ACB-4670-8983-368850E93550.html","attributes":{"data-id":"configuring-the-sdcard-host-applications"},"menu":{"hasChildren":false},"tocID":"configuring-the-sdcard-host-applications-d202e99","topics":[]}]});
